@@ -11,10 +11,4 @@ class RemovedProduct extends Model
     use HasFactory;
 
     protected $fillable = ['product_id'];
-
-    public function products()
-    {
-
-        return $this->hasMany(Product::class);
-    }
 }

@@ -28,7 +28,7 @@ class RemovedProductController extends Controller
     {
 
         $validator = Validator::make([
-            'product_id' => $request->product_id
+            'product_id' => $request->input('product_id')
         ], [
             'product_id' => 'required|exists:products,id'
         ]);
@@ -50,8 +50,7 @@ class RemovedProductController extends Controller
      */
     public function show(RemovedProduct $removedProduct)
     {
-        $test = RemovedProduct::where("product_id", $removedProduct->id)->get();
-        return $test;
+        return RemovedProduct::where("product_id", $removedProduct->product_id)->get();
     }
 
     /**
