@@ -4,10 +4,10 @@
     <section class="container-products-home">
 
         <div class="home-banner">
-            <div class="slogan">
+            <div id="slogan" class="slogan">
                 <h2>Listen <br> <span>better</span></h2>
             </div>
-            <div class="vinyle">
+            <div id="vinyle" class="vinyle">
                 <img src="/img/home/vinyle.png" alt="Vinyle">
             </div>
         </div>
@@ -29,6 +29,7 @@
             </div>
         </div>
     </section>
+    <div id="go-top" v-on:click="scrollTop()"><img src="/img/top.png" alt="Icon Arrow"></div>
     <FooterComponent/>
 </template>
 
@@ -70,6 +71,9 @@ export default {
             localStorage.myCart = JSON.stringify(this.cart);
             this.emitter.emit("number", this.cart.length);
             $product.isAddedToCart = true;
+        },
+        scrollTop() {
+            window.scrollTo({top: 0, behavior: 'smooth'});
         }
     },
     mounted() {
@@ -78,6 +82,17 @@ export default {
         if (localStorage.myCart) {
             this.cart = JSON.parse(localStorage.myCart)
         }
+
+        const slogan = document.getElementById("slogan");
+        const vinyle = document.getElementById("vinyle");
+
+        setTimeout(() => {
+            slogan.style.opacity = 1;
+        }, 1000);
+
+        setTimeout(() => {
+            vinyle.style.opacity = 1;
+        }, 1700)
     }
 }
 </script>
@@ -105,20 +120,32 @@ export default {
     text-transform: uppercase;
     color: white;
     letter-spacing: 10px;
+    opacity: 0;
+    transition: opacity 1s;
 }
 
 .home-banner .slogan span{
     font-size: 4vw;
 }
 
+.home-banner .vinyle {
+    opacity: 0;
+    transition: opacity 2s;
+}
+
 .home-banner .vinyle img {
     width: 25vw;
+    border-radius: 50%;
     animation: rotating 30s linear infinite; ;
 }
 
 @keyframes rotating {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
+}
+
+.home-banner .vinyle img:hover {
+    animation-play-state: paused;
 }
 
 .container-products-home h3 {
@@ -130,14 +157,12 @@ export default {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
-    gap: 10px;
 }
 
 .home-products .product {
-    width: 22vw;
-    height: 22vw;
-    min-width: 285px;
-    min-height: 285px;
+    width: 23%;
+    min-width: 230px;
+    aspect-ratio: 1;
     border-radius: 20px;
     background-color: rgb(61, 61, 61);
     padding: 10px;
@@ -146,7 +171,6 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    
     cursor: pointer;
     transition: margin-top .3s, 
                 background-color .3s,
@@ -177,7 +201,7 @@ export default {
 }
 
 .home-products .product .price-add-to-cart .price {
-    font-size: 1.5rem;
+    font-size: 1.5vw;
     font-weight: bold;
     width: 30%;
 }
@@ -227,5 +251,25 @@ export default {
 
 .home-products .product .price-add-to-cart .added button:after {
     opacity: 1;
+}
+
+#go-top {
+    width: 30px;
+    height: 30px;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    border-radius: 50%;
+    background-color: #fff;
+    transition: background-color .3s;
+    cursor: pointer;
+}
+
+#go-top:hover {
+    background-color: #c5a11144;
+}
+
+#go-top img {
+    width: 100%;
 }
 </style>

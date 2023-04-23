@@ -19839,6 +19839,12 @@ __webpack_require__.r(__webpack_exports__);
       localStorage.myCart = JSON.stringify(this.cart);
       this.emitter.emit("number", this.cart.length);
       $product.isAddedToCart = true;
+    },
+    scrollTop: function scrollTop() {
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth'
+      });
     }
   },
   mounted: function mounted() {
@@ -19846,6 +19852,14 @@ __webpack_require__.r(__webpack_exports__);
     if (localStorage.myCart) {
       this.cart = JSON.parse(localStorage.myCart);
     }
+    var slogan = document.getElementById("slogan");
+    var vinyle = document.getElementById("vinyle");
+    setTimeout(function () {
+      slogan.style.opacity = 1;
+    }, 1000);
+    setTimeout(function () {
+      vinyle.style.opacity = 1;
+    }, 1700);
   }
 });
 
@@ -20037,8 +20051,10 @@ var _hoisted_1 = {
 var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "home-banner"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  id: "slogan",
   "class": "slogan"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h2", null, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)("Listen "), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("br"), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("span", null, "better")])]), /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  id: "vinyle",
   "class": "vinyle"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   src: "/img/home/vinyle.png",
@@ -20059,6 +20075,11 @@ var _hoisted_8 = {
   "class": "price"
 };
 var _hoisted_9 = ["onClick"];
+var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+  src: "/img/top.png",
+  alt: "Icon Arrow"
+}, null, -1 /* HOISTED */);
+var _hoisted_11 = [_hoisted_10];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_NavComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("NavComponent");
   var _component_FooterComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FooterComponent");
@@ -20076,7 +20097,12 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
         return $options.addToCart(product);
       }
     }, "Add to cart", 8 /* PROPS */, _hoisted_9)], 2 /* CLASS */)])]);
-  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FooterComponent)], 64 /* STABLE_FRAGMENT */);
+  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    id: "go-top",
+    onClick: _cache[0] || (_cache[0] = function ($event) {
+      return $options.scrollTop();
+    })
+  }, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FooterComponent)], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -20465,7 +20491,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container-products-home {\r\n    min-height: 100vh;\r\n    padding: 15px 50px;\n}\n.home-banner {\r\n    width: 100%;\r\n    height: calc(100vh - 86px);\r\n    background: url(\"/img/home/pink-banner.jpg\");\r\n    background-size: cover;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    padding: 0 5%;\n}\n.home-banner .slogan {\r\n    font-size: 4.5vw;\r\n    text-transform: uppercase;\r\n    color: white;\r\n    letter-spacing: 10px;\n}\n.home-banner .slogan span{\r\n    font-size: 4vw;\n}\n.home-banner .vinyle img {\r\n    width: 25vw;\r\n    animation: rotating 30s linear infinite;\n}\n@keyframes rotating {\nfrom { transform: rotate(0deg);\n}\nto { transform: rotate(360deg);\n}\n}\n.container-products-home h3 {\r\n    margin-top: 100px;\r\n    margin-bottom: 50px;\n}\n.home-products {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-wrap: wrap;\r\n    gap: 10px;\n}\n.home-products .product {\r\n    width: 22vw;\r\n    height: 22vw;\r\n    min-width: 285px;\r\n    min-height: 285px;\r\n    border-radius: 20px;\r\n    background-color: rgb(61, 61, 61);\r\n    padding: 10px;\r\n    text-align: center;\r\n    color: white;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: space-between;\r\n    \r\n    cursor: pointer;\r\n    transition: margin-top .3s, \r\n                background-color .3s,\r\n                box-shadow .3s;\n}\n.home-products .product:hover {\r\n    margin-top: -10px;\r\n    background-color: rgba(61, 61, 61, 0.863);\r\n    box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.63);\n}\n.home-products .product img {\r\n    width: 60%;\r\n    margin: auto;\r\n    transition: transform .3s;\n}\n.home-products .product:hover img {\r\n    transform: scale(1.1);\n}\n.home-products .product .price-add-to-cart {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 20px;\n}\n.home-products .product .price-add-to-cart .price {\r\n    font-size: 1.5rem;\r\n    font-weight: bold;\r\n    width: 30%;\n}\n.home-products .product .price-add-to-cart .add-to-cart {\r\n    width: 70%;\n}\n.home-products .product .price-add-to-cart button {\r\n    width: 100%;\r\n    height: 100%;\r\n    color: white;\r\n    background-color: transparent;\r\n    border: none;\r\n    text-transform: uppercase;\r\n    border: 2px solid white;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n    transition: background-color .2s;\r\n    padding: 10px 0;\n}\n.home-products .product .price-add-to-cart button:hover {\r\n    background-color: white;\r\n    color: black;\n}\n.home-products .product .added button {\r\n    pointer-events: none;\r\n    background-color: white;\r\n    border: 2px solid #00606E;\r\n    color: #00606E;\r\n    opacity: .6;\n}\n.home-products .product .added button:after {\r\n    content: \" \";\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 10px;\r\n    border-right: 3px solid #00606E;\r\n    border-bottom: 3px solid #00606E;\r\n    margin-left: 15px;\r\n    transform: rotate(45deg);\r\n    opacity: 0;\r\n    transition: .3;\n}\n.home-products .product .price-add-to-cart .added button:after {\r\n    opacity: 1;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container-products-home {\r\n    min-height: 100vh;\r\n    padding: 15px 50px;\n}\n.home-banner {\r\n    width: 100%;\r\n    height: calc(100vh - 86px);\r\n    background: url(\"/img/home/pink-banner.jpg\");\r\n    background-size: cover;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    padding: 0 5%;\n}\n.home-banner .slogan {\r\n    font-size: 4.5vw;\r\n    text-transform: uppercase;\r\n    color: white;\r\n    letter-spacing: 10px;\r\n    opacity: 0;\r\n    transition: opacity 1s;\n}\n.home-banner .slogan span{\r\n    font-size: 4vw;\n}\n.home-banner .vinyle {\r\n    opacity: 0;\r\n    transition: opacity 2s;\n}\n.home-banner .vinyle img {\r\n    width: 25vw;\r\n    border-radius: 50%;\r\n    animation: rotating 30s linear infinite;\n}\n@keyframes rotating {\nfrom { transform: rotate(0deg);\n}\nto { transform: rotate(360deg);\n}\n}\n.home-banner .vinyle img:hover {\r\n    animation-play-state: paused;\n}\n.container-products-home h3 {\r\n    margin-top: 100px;\r\n    margin-bottom: 50px;\n}\n.home-products {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-wrap: wrap;\n}\n.home-products .product {\r\n    width: 23%;\r\n    min-width: 230px;\r\n    aspect-ratio: 1;\r\n    border-radius: 20px;\r\n    background-color: rgb(61, 61, 61);\r\n    padding: 10px;\r\n    text-align: center;\r\n    color: white;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: space-between;\r\n    cursor: pointer;\r\n    transition: margin-top .3s, \r\n                background-color .3s,\r\n                box-shadow .3s;\n}\n.home-products .product:hover {\r\n    margin-top: -10px;\r\n    background-color: rgba(61, 61, 61, 0.863);\r\n    box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.63);\n}\n.home-products .product img {\r\n    width: 60%;\r\n    margin: auto;\r\n    transition: transform .3s;\n}\n.home-products .product:hover img {\r\n    transform: scale(1.1);\n}\n.home-products .product .price-add-to-cart {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 20px;\n}\n.home-products .product .price-add-to-cart .price {\r\n    font-size: 1.5vw;\r\n    font-weight: bold;\r\n    width: 30%;\n}\n.home-products .product .price-add-to-cart .add-to-cart {\r\n    width: 70%;\n}\n.home-products .product .price-add-to-cart button {\r\n    width: 100%;\r\n    height: 100%;\r\n    color: white;\r\n    background-color: transparent;\r\n    border: none;\r\n    text-transform: uppercase;\r\n    border: 2px solid white;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n    transition: background-color .2s;\r\n    padding: 10px 0;\n}\n.home-products .product .price-add-to-cart button:hover {\r\n    background-color: white;\r\n    color: black;\n}\n.home-products .product .added button {\r\n    pointer-events: none;\r\n    background-color: white;\r\n    border: 2px solid #00606E;\r\n    color: #00606E;\r\n    opacity: .6;\n}\n.home-products .product .added button:after {\r\n    content: \" \";\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 10px;\r\n    border-right: 3px solid #00606E;\r\n    border-bottom: 3px solid #00606E;\r\n    margin-left: 15px;\r\n    transform: rotate(45deg);\r\n    opacity: 0;\r\n    transition: .3;\n}\n.home-products .product .price-add-to-cart .added button:after {\r\n    opacity: 1;\n}\n#go-top {\r\n    width: 30px;\r\n    height: 30px;\r\n    position: fixed;\r\n    bottom: 15px;\r\n    right: 15px;\r\n    border-radius: 50%;\r\n    background-color: #fff;\r\n    transition: background-color .3s;\r\n    cursor: pointer;\n}\n#go-top:hover {\r\n    background-color: #c5a11144;\n}\n#go-top img {\r\n    width: 100%;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 
