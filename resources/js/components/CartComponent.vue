@@ -1,8 +1,8 @@
 <template>
     <NavComponent/>
-    <section class="container-cart">
+    <section class="container-cart" v-if="products.length != 0">
         <div class="left">
-            <h1>Cart</h1>
+            <h1 class="cart-title-part">Cart</h1>
             <div class="products-in-cart" >
                 <div class="product-cart" v-for="product in products" :key="product.id">
                     <div class="image">
@@ -13,7 +13,7 @@
                             <h4>{{ product.name }}</h4>
                         </div>
                         <div class="price">
-                            <p>{{ product.price }} €</p>
+                            <p>{{ product.price*1 }} €</p>
                         </div>
                         <div class="quantity">
                             <p>Quantity : {{ product.quantity }}</p>
@@ -32,8 +32,45 @@
             </div>
         </div>
         <div class="right">
+            <div class="delivery-choice">
+                <h3 class="title">Delivery</h3>
+                <div class="choice">
+                    <label for="free">
+                        <input type="radio" name="free" id="free" :value="0" v-model="delivery">
+                        Free
+                    </label>
+                    <label for="fast">
+                        <input type="radio" name="fast" id="fast" :value="13.80" v-model="delivery" >
+                        Fast delivery : 13,80 €
+                    </label>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="coupon-code">
+                <h3 class="title">Coupon code</h3>
+                <div class="input-button">
+                    <input type="text" placeholder="Enter your code">
+                    <button><div class="checkmark"></div></button>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <div class="subtotal">
+                <div class="label-price">
+                    <div class="subtotal-shipping">Delivery</div>
+                    <div class="subtotal-shipping-price">{{ delivery == 0 ? "Free" : delivery.toFixed(2)+ "€" }}</div>
+                </div>
+                <div class="label-price">
+                    <div class="subtotal-total">Subtotal</div>
+                    <div class="subtotal-total-price"><b>{{ (delivery + subtotal).toFixed(2) }}€</b></div>
+                </div>
+            </div>
+            <div class="divider"></div>
+            <button class="proceed-to-checkout">Proceed to checkout</button>
         </div>
     </section>
+    <div v-else class="empty-cart">
+        <p>There are no products in your cart ...</p>
+    </div>
 </template>
 
 <script>
@@ -45,13 +82,12 @@ export default {
     },
     data() {
         return {
-            products: []
+            products: [],
+            delivery: 0
         }
     },
     methods: {
-
 		deleteProducts($product) {
-
 			this.products.splice(this.products.indexOf($product), 1);
             localStorage.myCart = JSON.stringify(this.products);
             this.emitter.emit("number", this.products.length);
@@ -64,10 +100,19 @@ export default {
             ).catch(
                 err => console.log(err)
             );
-
 		},
-
 	},
+    computed : {
+        subtotal() {
+            let total = 0;
+
+            for (let index = 0; index < this.products.length; index++) {
+               total += parseFloat(this.products[index].price);                
+            }
+
+            return total;
+        }
+    },
     mounted() {
 
         if(localStorage.myCart) {
@@ -78,16 +123,18 @@ export default {
 </script>
 
 <style lang="css">
-.container-cart{
+.container-cart {
     width: 100%;
     padding: 0 50px 50px;
     display: flex;
+    align-items: baseline;
     gap: 50px;
+    margin-top: 50px;
 }
 
 .left {
-    width: 60%;
-    background-color: rgb(240, 240, 240);
+    width: 70%;
+    background-color: #F5F4F7;
     border-radius: 20px;
     padding: 15px 30px;
 }
@@ -99,7 +146,7 @@ export default {
 }
 
 .product-cart:not(:last-child) {
-    border-bottom: 1px solid rgb(184, 183, 183);
+    border-bottom: 1px solid rgba(184, 183, 183, 0.447);
 }
 
 .product-cart:last-child {
@@ -108,11 +155,11 @@ export default {
 }
 
 .product-cart .image {
-    height: 100px;
+    height: 80px;
 }
 
 .product-cart .image img{
-    width: 100px;
+    width: 80px;
     border-radius: 20px;
 }
 
@@ -122,6 +169,10 @@ export default {
     flex-direction: column;
     justify-content: space-between;
     flex: 1;
+}
+
+.product-cart .informations .price {
+    color: #00606E;
 }
 
 .product-cart .total-action {
@@ -134,29 +185,155 @@ export default {
 .product-cart .total p{
     font-weight: bold;
     font-size: 1.2rem;
+    color: #00606E
 }
 
 .product-cart .delete {
     display: flex;
     align-items: center;
     cursor: pointer;
+    transition: color .3s;
+}
+
+.product-cart .delete:hover {
+   color: rgba(255, 0, 0, 0.719);
 }
 
 .product-cart .delete img {
-    width: 30px;
+    width: 25px;
+    height: 25px;
     margin-right: 10px;
 }
 
 .product-cart .name h4{
     color: grey;
     font-weight: normal;
-    font-size: 1.2rem;
 }
 
 .right {
-    width: 40%;
+    width: 30%;
     border-radius: 20px;
+    background-color: #F5F4F7;
+    padding: 15px 30px;
+    position: sticky;
+    top: 20px;
+}
+
+.delivery-choice .choice {
+    display: flex;
+    flex-direction: column;
+    margin-top: 15px;
+}
+
+.delivery-choice label {
+    cursor: pointer;
+}
+.delivery-choice label:not(:first-child) {
+    margin-top: 10px;
+}
+
+.delivery-choice label input {
+    accent-color: #00606E;
+}
+
+.right .divider {
+    width: 100%;
+    border-bottom: 1px solid rgba(184, 183, 183, 0.447);
+    margin: 20px 0;
+}
+
+.input-button {
+    display: flex;
+    padding-top: 20px;
+}
+
+.coupon-code input {
+    flex: 1;
+    border: 1px solid #C5A011;
+    border-right: none;
+    padding: 10px;
+    outline: none;
+}
+
+.coupon-code button {
+    width: 30px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: none;
+    background-color: #fff;
+    padding-right: 15px;
+    border: 1px solid #C5A011;
+    border-left: none;
+    cursor: pointer;
+}
+
+.coupon-code button .checkmark {
+    width: 10px;
+    height: 15px;
+    border-right: 3px solid #00606E;
+    border-bottom: 3px solid #00606E;
+    transform: rotate(45deg);
+}
+
+.label-price {
+    display: flex;
+    justify-content: space-between;
+}
+
+.label-price:not(:first-child) {
+    margin-top: 10px;
+}
+
+.label-price b {
+    color: #00606E;
+}
+
+.proceed-to-checkout {
+    width: 100%;
+    padding: 15px;
+    text-transform: uppercase;
+    font-weight: bold;
+    border: 1px solid #C5A011;
+    color: black;
+    cursor: pointer;
+    position: relative;
+    background-color: transparent;
+    transition: color .3s;
+}
+
+.proceed-to-checkout:hover {
+    color: #C5A011;
+}
+
+.proceed-to-checkout:before {
+  content: "";
+  display: block;
+  transform: scaleX(0);
+  transform-origin: bottom right;
+  background-color: #c5a11144;
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  transition: transform .5s;
+}
+
+.proceed-to-checkout:hover::before {
+  transform: scaleX(1);
+  transform-origin: bottom left;
+}
+
+.empty-cart {
+    width: fit-content;
+    margin: auto;
+    margin-top: 50px;
+    padding: 15px 100px;
+    border-radius: 20px;
+    text-align: center;
     background-color: rgb(240, 240, 240);
-    padding:15px 30px
+}
+
+.empty-cart p {
+    font-style: italic;
+    color: #c5a11184;
 }
 </style>

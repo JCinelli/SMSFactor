@@ -1,18 +1,43 @@
 <template>
     <nav class="container-navbar">
+        <div class="logo">
+            <router-link to="/">
+                <p>Cosmo</p>
+            </router-link>
+        </div>
         <ul>
             <li class="nav-element">
-                <router-link to="/">
-                    <img src="/img/logo.png" alt="">
-                </router-link>
+                Categories
             </li>
             <li class="nav-element">
-                <router-link to="/cart" class="router-cart">
-                    <img class="cart" src="/img/cart.png" alt="">
-                    <span class="number">{{ number }}</span>
-                </router-link>
+                Brand
+            </li>
+            <li class="nav-element">
+                Contact
+            </li>
+            <li class="nav-element">
+                FAQs
             </li>
         </ul>
+        <div class="account-actions">
+            <router-link to="/cart">
+                <div class="cart">
+                    <img src="/img/cart.png" alt="Cart Icon">
+                    <span v-if="number" class="bubble">{{ number }}</span>
+                </div>
+            </router-link>
+            <div class="notifications">
+                <img src="/img/notification.png" alt="Notification Icon">
+                <span class="bubble">1</span>
+            </div>
+            <div class="account">
+                <img src="/img/avatar.png" alt="Avatar">
+                <div class="user-name">
+                    <p>My account</p>
+                    <p><b>Jeremy Cinelli</b></p>
+                </div>
+            </div>
+        </div>
     </nav>
 </template>
 
@@ -40,39 +65,112 @@ export default {
 .container-navbar {
     width: 100%;
     display: flex;
-    background-color: rgb(240, 240, 240);
-    margin-bottom: 50px;
+    padding: 15px 50px;
+}
+
+.logo {
+    font-size: 2rem;
 }
 
 .container-navbar ul {
     display: flex;
     flex: 1;
-    justify-content: space-between;
+    align-items: center;
+    padding-left: 50px;
+    cursor: pointer;
+}
+
+.container-navbar ul li {
+    padding: 0 20px;
+    transition: color .3s;
+}
+
+.container-navbar ul li:hover {
+    color: #C5A011;
+}
+
+.account-actions {
+    display: flex;
     align-items: center;
 }
 
-.nav-element a {
-    padding-right: 80px;
-}
-
-.router-cart{
+.cart, .notifications {
     position: relative;
-}
-
-.cart, .number{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    padding: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-right: 20px;
+    cursor: pointer;
 }
 
 .cart {
-    width: 35px;
+    background-color: #c5a11144;
 }
 
-.number{
-    transform: translate(-50%, -65%);
+.cart .bubble {
+    background-color: #00606E;
+}
+
+.bubble {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    font-size: .6rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    top: -3px;
+    right: -3px;
+    color: white;
+    font-weight: bold;
+
+}
+
+.notifications {
+    background-color: #005f6e46;
+}
+
+.notifications .bubble {
+    background-color: #C5A011;
+}
+
+.cart img, .notifications img {
+    width: 25px;
+    transition: transform 0.2s;
+}
+
+.cart:hover img, .notifications:hover img {
+    transform: scale(1.1)
+}
+
+.account {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    transition: color .2s;
+}
+
+.account:hover {
+    color: #C5A011;
+}
+
+.account img {
+    border-radius: 50%;
+    width: 41px;
+    margin-right: 15px;
+}
+
+.account .user-name {
     font-size: .8rem;
 }
+
+.account .user-name b {
+    font-size: 1;
+    color: #00606E;
+}
+
 
 </style>

@@ -1,33 +1,33 @@
 [
     {
-        "image": "/img/razer.webp",
-        "name": "Micro-casque Razer Kraken Kitty Edition - Quartz",
-        "description": "Un look irrésistible avec rétroéclairage",
-        "price": "189.99",
+        "image": "/img/products/sony.png",
+        "name": "SONY WH-1000XM4",
+        "description": "Le meilleur casque audi Bluetooth",
+        "price": "329",
         "created_at": "2023-04-20T20:15:11.000000Z",
         "updated_at": "2023-04-20T20:15:11.000000Z"
     },
     {
-        "image": "/img/logitech.webp",
-        "name": "Micro-casque Logitech G432 7.1",
-        "description": "Un son DTS à 360°",
-        "price": "59.90",
+        "image": "/img/products/bose.png",
+        "name": "BOSE HEADPHONES 700",
+        "description": "La meilleure réduction de bruit",
+        "price": "319",
         "created_at": "2023-04-20T20:15:45.000000Z",
         "updated_at": "2023-04-20T20:15:45.000000Z"
     },
     {
-        "image": "/img/corsair.webp",
-        "name": "Micro-casque Corsair HS35 Carbon",
-        "description": "Une véritable plongée auditive",
-        "price": "54.95",
+        "image": "/img/products/apple.png",
+        "name": "APPLE AIRPODS MAX",
+        "description": "Le casque Bluetooth d'Apple",
+        "price": "629",
         "created_at": "2023-04-20T20:16:36.000000Z",
         "updated_at": "2023-04-20T20:16:36.000000Z"
     },
     {
-        "image": "/img/asus.webp",
-        "name": "Micro-casque Asus ROG DELTA S",
-        "description": "Un casque audio gamer aux caractéristiques époustouflantes",
-        "price": "199.99",
+        "image": "/img/products/yamaha.png",
+        "name": "YAMAHA YH-L700",
+        "description": "Le son en 3D",
+        "price": "448",
         "created_at": "2023-04-20T20:17:03.000000Z",
         "updated_at": "2023-04-20T20:17:03.000000Z"
     }
