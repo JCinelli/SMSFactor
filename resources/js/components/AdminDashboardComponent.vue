@@ -2,8 +2,9 @@
    <section class="container-dashboard-admin">
     <h1 class="title-page">Analytics</h1>
     <div class="products-removed-part">
-        <h2>Products most often removed from the cart :</h2>
-        <div class="products-removed">
+        <h2 v-if="products.length > 0">Products most often removed from the cart :</h2>
+        <h2 v-else>You have not yet created any products in your store</h2>
+        <div v-if="products.length > 0" class="products-removed">
             <div class="labels">
                 <div class="gap"></div>
                 <div class="id-label">Id</div>

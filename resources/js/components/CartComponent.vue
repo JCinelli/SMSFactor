@@ -329,11 +329,11 @@ export default {
     padding: 15px 100px;
     border-radius: 20px;
     text-align: center;
-    background-color: rgb(240, 240, 240);
+    background-color: #F5F4F7;
 }
 
 .empty-cart p {
     font-style: italic;
-    color: #c5a11184;
+    color: grey;
 }
 </style>
