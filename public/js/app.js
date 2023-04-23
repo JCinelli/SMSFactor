@@ -19849,6 +19849,14 @@ __webpack_require__.r(__webpack_exports__);
       // Emission du nombre de produit dans le panier
       this.emitter.emit("numberProductsInCart", this.cart.length);
       $product.isAddedToCart = true;
+      this.eventMessage();
+    },
+    eventMessage: function eventMessage() {
+      var bubbleMessage = document.getElementById("add-to-cart-message");
+      bubbleMessage.style.right = "0";
+      setTimeout(function () {
+        bubbleMessage.style.right = "-100%";
+      }, 5000);
     },
     scrollTop: function scrollTop() {
       window.scrollTo({
@@ -19908,6 +19916,7 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteProducts: function deleteProducts($product) {
+      var _this = this;
       // Suppression du produit dans le tableau
       this.products.splice(this.products.indexOf($product), 1);
       // Enregistrement du nouveau tableau dans le localStorage
@@ -19919,10 +19928,17 @@ __webpack_require__.r(__webpack_exports__);
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/removed_products", {
         product_id: $product.id
       }).then(function (res) {
-        return console.log(res);
+        return _this.eventMessage();
       })["catch"](function (err) {
         return console.log(err);
       });
+    },
+    eventMessage: function eventMessage() {
+      var bubbleMessage = document.getElementById("add-to-cart-message");
+      bubbleMessage.style.right = "0";
+      setTimeout(function () {
+        bubbleMessage.style.right = "-100%";
+      }, 5000);
     }
   },
   computed: {
@@ -20070,10 +20086,14 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  id: "add-to-cart-message",
+  "class": "event-bubble added"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Product added to cart")], -1 /* HOISTED */);
+var _hoisted_2 = {
   "class": "container-products-home"
 };
-var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "home-banner"
 }, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   id: "slogan",
@@ -20085,49 +20105,49 @@ var _hoisted_2 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementV
   src: "/img/home/vinyle.png",
   alt: "Vinyle"
 })])], -1 /* HOISTED */);
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Best Bluetooth headphones 2023", -1 /* HOISTED */);
-var _hoisted_4 = {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", null, "Best Bluetooth headphones 2023", -1 /* HOISTED */);
+var _hoisted_5 = {
   "class": "home-products"
 };
-var _hoisted_5 = {
+var _hoisted_6 = {
   "class": "name"
 };
-var _hoisted_6 = ["src"];
-var _hoisted_7 = {
+var _hoisted_7 = ["src"];
+var _hoisted_8 = {
   "class": "price-add-to-cart"
 };
-var _hoisted_8 = {
+var _hoisted_9 = {
   "class": "price"
 };
-var _hoisted_9 = ["onClick"];
-var _hoisted_10 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+var _hoisted_10 = ["onClick"];
+var _hoisted_11 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   src: "/img/top.png",
   alt: "Icon Arrow"
 }, null, -1 /* HOISTED */);
-var _hoisted_11 = [_hoisted_10];
+var _hoisted_12 = [_hoisted_11];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_NavComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("NavComponent");
   var _component_FooterComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("FooterComponent");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NavComponent), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_1, [_hoisted_2, _hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.products, function (product) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NavComponent), _hoisted_1, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("section", _hoisted_2, [_hoisted_3, _hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.products, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "product",
       key: product.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_5, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", _hoisted_6, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1 /* TEXT */), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: product.image,
       alt: "Headphone"
-    }, null, 8 /* PROPS */, _hoisted_6), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.price * 1) + " €", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    }, null, 8 /* PROPS */, _hoisted_7), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.price * 1) + " €", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       "class": (0,vue__WEBPACK_IMPORTED_MODULE_0__.normalizeClass)(product.isAddedToCart ? 'add-to-cart added' : 'add-to-cart')
     }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
       onClick: function onClick($event) {
         return $options.addToCart(product);
       }
-    }, "Add to cart", 8 /* PROPS */, _hoisted_9)], 2 /* CLASS */)])]);
+    }, "Add to cart", 8 /* PROPS */, _hoisted_10)], 2 /* CLASS */)])]);
   }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
     id: "go-top",
     onClick: _cache[0] || (_cache[0] = function ($event) {
       return $options.scrollTop();
     })
-  }, _hoisted_11), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FooterComponent)], 64 /* STABLE_FRAGMENT */);
+  }, _hoisted_12), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_FooterComponent)], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -20145,119 +20165,123 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ });
 /* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.esm-bundler.js");
 
-var _hoisted_1 = {
+var _hoisted_1 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+  id: "add-to-cart-message",
+  "class": "event-bubble removed"
+}, [/*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Product deleted")], -1 /* HOISTED */);
+var _hoisted_2 = {
   key: 0,
   "class": "container-cart"
 };
-var _hoisted_2 = {
+var _hoisted_3 = {
   "class": "left"
 };
-var _hoisted_3 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
+var _hoisted_4 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h1", {
   "class": "cart-title-part"
 }, "Cart", -1 /* HOISTED */);
-var _hoisted_4 = {
+var _hoisted_5 = {
   "class": "products-in-cart"
 };
-var _hoisted_5 = {
+var _hoisted_6 = {
   "class": "image"
 };
-var _hoisted_6 = ["src"];
-var _hoisted_7 = {
+var _hoisted_7 = ["src"];
+var _hoisted_8 = {
   "class": "informations"
 };
-var _hoisted_8 = {
+var _hoisted_9 = {
   "class": "name"
 };
-var _hoisted_9 = {
+var _hoisted_10 = {
   "class": "price"
 };
-var _hoisted_10 = {
+var _hoisted_11 = {
   "class": "quantity"
 };
-var _hoisted_11 = {
+var _hoisted_12 = {
   "class": "total-action"
 };
-var _hoisted_12 = {
+var _hoisted_13 = {
   "class": "total"
 };
-var _hoisted_13 = ["onClick"];
-var _hoisted_14 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+var _hoisted_14 = ["onClick"];
+var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
   src: "/img/delete.png",
   alt: "Delete Icon"
 }, null, -1 /* HOISTED */);
-var _hoisted_15 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Delete", -1 /* HOISTED */);
-var _hoisted_16 = [_hoisted_14, _hoisted_15];
-var _hoisted_17 = {
+var _hoisted_16 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Delete", -1 /* HOISTED */);
+var _hoisted_17 = [_hoisted_15, _hoisted_16];
+var _hoisted_18 = {
   "class": "right"
 };
-var _hoisted_18 = {
+var _hoisted_19 = {
   "class": "delivery-choice"
 };
-var _hoisted_19 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
+var _hoisted_20 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h3", {
   "class": "title"
 }, "Delivery", -1 /* HOISTED */);
-var _hoisted_20 = {
+var _hoisted_21 = {
   "class": "choice"
 };
-var _hoisted_21 = {
+var _hoisted_22 = {
   "for": "free"
 };
-var _hoisted_22 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Free ");
-var _hoisted_23 = {
+var _hoisted_23 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Free ");
+var _hoisted_24 = {
   "for": "fast"
 };
-var _hoisted_24 = ["value"];
-var _hoisted_25 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Fast delivery : 13,80 € ");
-var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"divider\"></div><div class=\"coupon-code\"><h3 class=\"title\">Coupon code</h3><div class=\"input-button\"><input type=\"text\" placeholder=\"Enter your code\"><button><div class=\"checkmark\"></div></button></div></div><div class=\"divider\"></div>", 3);
-var _hoisted_29 = {
+var _hoisted_25 = ["value"];
+var _hoisted_26 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createTextVNode)(" Fast delivery : 13,80 € ");
+var _hoisted_27 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createStaticVNode)("<div class=\"divider\"></div><div class=\"coupon-code\"><h3 class=\"title\">Coupon code</h3><div class=\"input-button\"><input type=\"text\" placeholder=\"Enter your code\"><button><div class=\"checkmark\"></div></button></div></div><div class=\"divider\"></div>", 3);
+var _hoisted_30 = {
   "class": "subtotal"
 };
-var _hoisted_30 = {
+var _hoisted_31 = {
   "class": "label-price"
 };
-var _hoisted_31 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_32 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "subtotal-shipping"
 }, "Delivery", -1 /* HOISTED */);
-var _hoisted_32 = {
+var _hoisted_33 = {
   "class": "subtotal-shipping-price"
 };
-var _hoisted_33 = {
+var _hoisted_34 = {
   "class": "label-price"
 };
-var _hoisted_34 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_35 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "subtotal-total"
 }, "Subtotal", -1 /* HOISTED */);
-var _hoisted_35 = {
+var _hoisted_36 = {
   "class": "subtotal-total-price"
 };
-var _hoisted_36 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
   "class": "divider"
 }, null, -1 /* HOISTED */);
-var _hoisted_37 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
+var _hoisted_38 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("button", {
   "class": "proceed-to-checkout"
 }, "Proceed to checkout", -1 /* HOISTED */);
-var _hoisted_38 = {
+var _hoisted_39 = {
   key: 1,
   "class": "empty-cart"
 };
-var _hoisted_39 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "There are no products in your cart ...", -1 /* HOISTED */);
-var _hoisted_40 = [_hoisted_39];
+var _hoisted_40 = /*#__PURE__*/(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "There are no products in your cart ...", -1 /* HOISTED */);
+var _hoisted_41 = [_hoisted_40];
 function render(_ctx, _cache, $props, $setup, $data, $options) {
   var _component_NavComponent = (0,vue__WEBPACK_IMPORTED_MODULE_0__.resolveComponent)("NavComponent");
-  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NavComponent), $data.products.length != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_1, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_2, [_hoisted_3, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_4, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.products, function (product) {
+  return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createVNode)(_component_NavComponent), _hoisted_1, $data.products.length != 0 ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("section", _hoisted_2, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_3, [_hoisted_4, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(true), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)(vue__WEBPACK_IMPORTED_MODULE_0__.Fragment, null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.renderList)($data.products, function (product) {
     return (0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", {
       "class": "product-cart",
       key: product.id
-    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_5, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
+    }, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("img", {
       src: product.image,
       alt: "Headphone"
-    }, null, 8 /* PROPS */, _hoisted_6)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_7, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.price * 1) + " €", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Quantity : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.quantity), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((product.price * product.quantity).toFixed(2)) + " €", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
+    }, null, 8 /* PROPS */, _hoisted_7)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_8, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_9, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("h4", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.name), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_10, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.price * 1) + " €", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_11, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, "Quantity : " + (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(product.quantity), 1 /* TEXT */)])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_12, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_13, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("p", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)((product.price * product.quantity).toFixed(2)) + " €", 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", {
       "class": "delete",
       onClick: function onClick($event) {
         return $options.deleteProducts(product);
       }
-    }, _hoisted_16, 8 /* PROPS */, _hoisted_13)])]);
-  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_17, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [_hoisted_19, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_20, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+    }, _hoisted_17, 8 /* PROPS */, _hoisted_14)])]);
+  }), 128 /* KEYED_FRAGMENT */))])]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_18, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_19, [_hoisted_20, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_21, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_22, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "radio",
     name: "free",
     id: "free",
@@ -20265,7 +20289,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[0] || (_cache[0] = function ($event) {
       return $data.delivery = $event;
     })
-  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.delivery]]), _hoisted_22]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_23, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
+  }, null, 512 /* NEED_PATCH */), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.delivery]]), _hoisted_23]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("label", _hoisted_24, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.withDirectives)((0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("input", {
     type: "radio",
     name: "fast",
     id: "fast",
@@ -20273,7 +20297,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.delivery = $event;
     })
-  }, null, 8 /* PROPS */, _hoisted_24), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.delivery]]), _hoisted_25])])]), _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.delivery === 0 ? "Free" : $data.delivery.toFixed(2) + "€"), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(($data.delivery + $options.subtotal).toFixed(2)) + "€", 1 /* TEXT */)])])]), _hoisted_36, _hoisted_37])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_38, _hoisted_40))], 64 /* STABLE_FRAGMENT */);
+  }, null, 8 /* PROPS */, _hoisted_25), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.delivery]]), _hoisted_26])])]), _hoisted_27, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_31, [_hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.delivery === 0 ? "Free" : $data.delivery.toFixed(2) + "€"), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_34, [_hoisted_35, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_36, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(($data.delivery + $options.subtotal).toFixed(2)) + "€", 1 /* TEXT */)])])]), _hoisted_37, _hoisted_38])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_39, _hoisted_41))], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -20516,7 +20540,7 @@ __webpack_require__.r(__webpack_exports__);
 
 var ___CSS_LOADER_EXPORT___ = _node_modules_css_loader_dist_runtime_api_js__WEBPACK_IMPORTED_MODULE_0___default()(function(i){return i[1]});
 // Module
-___CSS_LOADER_EXPORT___.push([module.id, "\n.container-products-home {\r\n    min-height: 100vh;\r\n    padding: 15px 50px;\n}\n.home-banner {\r\n    width: 100%;\r\n    height: calc(100vh - 86px);\r\n    background: url(\"/img/home/pink-banner.jpg\");\r\n    background-size: cover;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    padding: 0 5%;\n}\n.home-banner .slogan {\r\n    font-size: 4.5vw;\r\n    text-transform: uppercase;\r\n    color: white;\r\n    letter-spacing: 10px;\r\n    opacity: 0;\r\n    transition: opacity 1s;\n}\n.home-banner .slogan span{\r\n    font-size: 4vw;\n}\n.home-banner .vinyle {\r\n    opacity: 0;\r\n    transition: opacity 2s;\n}\n.home-banner .vinyle img {\r\n    width: 25vw;\r\n    border-radius: 50%;\r\n    animation: rotating 30s linear infinite;\n}\n@keyframes rotating {\nfrom { transform: rotate(0deg);\n}\nto { transform: rotate(360deg);\n}\n}\n.home-banner .vinyle img:hover {\r\n    animation-play-state: paused;\n}\n.container-products-home h3 {\r\n    margin-top: 100px;\r\n    margin-bottom: 50px;\n}\n.home-products {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-wrap: wrap;\n}\n.home-products .product {\r\n    width: 23%;\r\n    min-width: 230px;\r\n    aspect-ratio: 1;\r\n    border-radius: 20px;\r\n    background-color: rgb(61, 61, 61);\r\n    padding: 10px;\r\n    text-align: center;\r\n    color: white;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: space-between;\r\n    cursor: pointer;\r\n    transition: margin-top .3s, \r\n                background-color .3s,\r\n                box-shadow .3s;\n}\n.home-products .product:hover {\r\n    margin-top: -10px;\r\n    background-color: rgba(61, 61, 61, 0.863);\r\n    box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.63);\n}\n.home-products .product img {\r\n    width: 60%;\r\n    margin: auto;\r\n    transition: transform .3s;\n}\n.home-products .product:hover img {\r\n    transform: scale(1.1);\n}\n.home-products .product .price-add-to-cart {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 20px;\n}\n.home-products .product .price-add-to-cart .price {\r\n    font-size: 1.5vw;\r\n    font-weight: bold;\r\n    width: 30%;\n}\n.home-products .product .price-add-to-cart .add-to-cart {\r\n    width: 70%;\n}\n.home-products .product .price-add-to-cart button {\r\n    width: 100%;\r\n    height: 100%;\r\n    color: white;\r\n    background-color: transparent;\r\n    border: none;\r\n    text-transform: uppercase;\r\n    border: 2px solid white;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n    transition: background-color .2s;\r\n    padding: 10px 0;\n}\n.home-products .product .price-add-to-cart button:hover {\r\n    background-color: white;\r\n    color: black;\n}\n.home-products .product .added button {\r\n    pointer-events: none;\r\n    background-color: white;\r\n    border: 2px solid #00606E;\r\n    color: #00606E;\r\n    opacity: .6;\n}\n.home-products .product .added button:after {\r\n    content: \" \";\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 10px;\r\n    border-right: 3px solid #00606E;\r\n    border-bottom: 3px solid #00606E;\r\n    margin-left: 15px;\r\n    transform: rotate(45deg);\r\n    opacity: 0;\r\n    transition: .3;\n}\n.home-products .product .price-add-to-cart .added button:after {\r\n    opacity: 1;\n}\n#go-top {\r\n    width: 30px;\r\n    height: 30px;\r\n    position: fixed;\r\n    bottom: 15px;\r\n    right: 15px;\r\n    border-radius: 50%;\r\n    background-color: #fff;\r\n    transition: background-color .3s;\r\n    cursor: pointer;\n}\n#go-top:hover {\r\n    background-color: #c5a11144;\n}\n#go-top img {\r\n    width: 100%;\n}\r\n", ""]);
+___CSS_LOADER_EXPORT___.push([module.id, "\n.container-products-home {\r\n    min-height: 100vh;\r\n    padding: 15px 50px;\n}\n.home-banner {\r\n    width: 100%;\r\n    height: calc(100vh - 86px);\r\n    background: url(\"/img/home/pink-banner.jpg\");\r\n    background-size: cover;\r\n    border-radius: 20px;\r\n    display: flex;\r\n    align-items: center;\r\n    justify-content: space-between;\r\n    padding: 0 5%;\n}\n.home-banner .slogan {\r\n    font-size: 4.5vw;\r\n    text-transform: uppercase;\r\n    color: white;\r\n    letter-spacing: 10px;\r\n    opacity: 0;\r\n    transition: opacity 1s;\n}\n.home-banner .slogan span{\r\n    font-size: 4vw;\n}\n.home-banner .vinyle {\r\n    opacity: 0;\r\n    transition: opacity 2s;\n}\n.home-banner .vinyle img {\r\n    width: 25vw;\r\n    border-radius: 50%;\r\n    animation: rotating 30s linear infinite;\n}\n@keyframes rotating {\nfrom { transform: rotate(0deg);\n}\nto { transform: rotate(360deg);\n}\n}\n.home-banner .vinyle img:hover {\r\n    animation-play-state: paused;\n}\n.container-products-home h3 {\r\n    margin-top: 100px;\r\n    margin-bottom: 50px;\n}\n.home-products {\r\n    display: flex;\r\n    justify-content: space-between;\r\n    flex-wrap: wrap;\n}\n.home-products .product {\r\n    width: 23%;\r\n    min-width: 230px;\r\n    aspect-ratio: 1;\r\n    border-radius: 20px;\r\n    background-color: rgb(61, 61, 61);\r\n    padding: 10px;\r\n    text-align: center;\r\n    color: white;\r\n    display: flex;\r\n    flex-direction: column;\r\n    justify-content: space-between;\r\n    transition: margin-top .3s, \r\n                background-color .3s,\r\n                box-shadow .3s;\n}\n.home-products .product:hover {\r\n    margin-top: -10px;\r\n    background-color: rgba(61, 61, 61, 0.863);\r\n    box-shadow: 0px 10px 15px 0px rgba(0,0,0,0.63);\n}\n.home-products .product img {\r\n    width: 60%;\r\n    margin: auto;\r\n    transition: transform .3s;\n}\n.home-products .product:hover img {\r\n    transform: scale(1.1);\n}\n.home-products .product .price-add-to-cart {\r\n    display: flex;\r\n    align-items: center;\r\n    gap: 20px;\n}\n.home-products .product .price-add-to-cart .price {\r\n    font-size: 1.5vw;\r\n    font-weight: bold;\r\n    width: 30%;\n}\n.home-products .product .price-add-to-cart .add-to-cart {\r\n    width: 70%;\n}\n.home-products .product .price-add-to-cart button {\r\n    width: 100%;\r\n    height: 100%;\r\n    color: white;\r\n    background-color: transparent;\r\n    border: none;\r\n    text-transform: uppercase;\r\n    border: 2px solid white;\r\n    border-radius: 20px;\r\n    cursor: pointer;\r\n    transition: background-color .2s;\r\n    padding: 10px 0;\n}\n.home-products .product .price-add-to-cart button:hover {\r\n    background-color: white;\r\n    color: black;\n}\n.home-products .product .added button {\r\n    pointer-events: none;\r\n    background-color: white;\r\n    border: 2px solid #00606E;\r\n    color: #00606E;\r\n    opacity: .6;\n}\n.home-products .product .added button:after {\r\n    content: \" \";\r\n    position: absolute;\r\n    width: 5px;\r\n    height: 10px;\r\n    border-right: 3px solid #00606E;\r\n    border-bottom: 3px solid #00606E;\r\n    margin-left: 15px;\r\n    transform: rotate(45deg);\r\n    opacity: 0;\r\n    transition: .3;\n}\n.home-products .product .price-add-to-cart .added button:after {\r\n    opacity: 1;\n}\n#go-top {\r\n    width: 30px;\r\n    height: 30px;\r\n    position: fixed;\r\n    bottom: 15px;\r\n    right: 15px;\r\n    border-radius: 50%;\r\n    background-color: #fff;\r\n    transition: background-color .3s;\r\n    cursor: pointer;\n}\n#go-top:hover {\r\n    background-color: #c5a11144;\n}\n#go-top img {\r\n    width: 100%;\n}\r\n", ""]);
 // Exports
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = (___CSS_LOADER_EXPORT___);
 

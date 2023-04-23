@@ -1,5 +1,6 @@
 <template>
     <NavComponent/>
+    <div id="add-to-cart-message" class="event-bubble removed"><p>Product deleted</p></div>
     <section class="container-cart" v-if="products.length != 0">
         <div class="left">
             <h1 class="cart-title-part">Cart</h1>
@@ -101,9 +102,19 @@ export default {
             axios.post("/api/removed_products", { 
                 product_id : $product.id
             })
-            .then(res => console.log(res))
+            .then(res => this.eventMessage())
             .catch(err => console.log(err));
 		},
+
+        eventMessage () {
+            const bubbleMessage = document.getElementById("add-to-cart-message");
+
+            bubbleMessage.style.right = "0";
+
+            setTimeout(() => {
+                bubbleMessage.style.right = "-100%";
+            }, 5000)
+        },
 	},
 
     computed : {

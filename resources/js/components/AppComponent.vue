@@ -1,8 +1,7 @@
 <template>
     <NavComponent />
-
+    <div id="add-to-cart-message" class="event-bubble added"><p>Product added to cart</p></div>
     <section class="container-products-home">
-
         <div class="home-banner">
             <div id="slogan" class="slogan">
                 <h2>Listen <br> <span>better</span></h2>
@@ -46,7 +45,7 @@ export default {
     data() {
         return {
             products: [],
-            cart: [], 
+            cart: []
         }
     },
 
@@ -81,9 +80,21 @@ export default {
             this.emitter.emit("numberProductsInCart", this.cart.length);
             
             $product.isAddedToCart = true;
+
+            this.eventMessage();
         },
 
-        scrollTop() {
+        eventMessage () {
+            const bubbleMessage = document.getElementById("add-to-cart-message");
+
+            bubbleMessage.style.right = "0";
+
+            setTimeout(() => {
+                bubbleMessage.style.right = "-100%";
+            }, 5000)
+        },
+
+        scrollTop () {
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
     },
@@ -186,7 +197,6 @@ export default {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    cursor: pointer;
     transition: margin-top .3s, 
                 background-color .3s,
                 box-shadow .3s;
