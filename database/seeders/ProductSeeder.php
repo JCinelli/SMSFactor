@@ -15,9 +15,11 @@ class ProductSeeder extends Seeder
      */
     public function run()
     {
+        // Récupération des données a partir d'un fichier json
         $json = File::get("database/datas/products.json");
         $products = json_decode($json);
 
+        // Insertion des produits
         foreach ($products as $key => $value) {
             Product::create([
                 "image" => $value->image,

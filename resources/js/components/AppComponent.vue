@@ -42,43 +42,57 @@ export default {
         NavComponent,
         FooterComponent
     },
+
     data() {
         return {
             products: [],
             cart: [], 
         }
     },
+
     methods: {
         getProducts() {
             axios.get('/api/products')
                 .then(response => this.products = response.data)
+                .catch(err => console.log(err));
         },
+
         addToCart($product) {
             let isInCart = false;
 
+            // Vérification de la présence du produit dans le panier
             for (let index = 0; index < this.cart.length; index++) {
                 if (this.cart[index].id === $product.id) {
+                    //Si il est présent on augment la quantité
                     this.cart[index].quantity++;
                     isInCart = true;
                 }
             }
 
+            // Si il n'y est pas, initialisation de la quantité a 1
             if (!isInCart) {
                 $product.quantity = 1;
                 this.cart.push($product);
             }
 
+            // Puis enregistremement du panier dans le localStorage
             localStorage.myCart = JSON.stringify(this.cart);
-            this.emitter.emit("number", this.cart.length);
+            // Emission du nombre de produit dans le panier
+            this.emitter.emit("numberProductsInCart", this.cart.length);
+            
             $product.isAddedToCart = true;
         },
+
         scrollTop() {
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
     },
+
     mounted() {
+        // Récupération de tous les produits
         this.getProducts();
 
+        // Si il y a un panier enregistré, récupération
         if (localStorage.myCart) {
             this.cart = JSON.parse(localStorage.myCart)
         }
@@ -86,6 +100,7 @@ export default {
         const slogan = document.getElementById("slogan");
         const vinyle = document.getElementById("vinyle");
 
+        // Permet l'effet d'apparition progressive
         setTimeout(() => {
             slogan.style.opacity = 1;
         }, 1000);

@@ -23,7 +23,7 @@
             <router-link to="/cart">
                 <div class="cart">
                     <img src="/img/cart.png" alt="Cart Icon">
-                    <span v-if="number" class="bubble">{{ number }}</span>
+                    <span v-if="numberProductsInCart" class="bubble">{{ numberProductsInCart }}</span>
                 </div>
             </router-link>
             <div class="notifications">
@@ -45,16 +45,19 @@
 export default {
     data() {
         return {
-            number : 0
+            numberProductsInCart : 0
         }
     },
+
     mounted() {
+        // Récupération du nombre de produits dans le panier si il y en a
         if(localStorage.myCart) {
-            this.number = JSON.parse(localStorage.myCart).length
+            this.numberProductsInCart = JSON.parse(localStorage.myCart).length
         }
 
-        this.emitter.on("number", number => {
-            this.number = number;
+        // Écoute des changements
+        this.emitter.on("numberProductsInCart", numberProductsInCart => {
+            this.numberProductsInCart = numberProductsInCart;
         });
 	}
 }

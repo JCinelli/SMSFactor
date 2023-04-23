@@ -19739,7 +19739,7 @@ __webpack_require__.r(__webpack_exports__);
   data: function data() {
     return {
       products: [],
-      removed_products: []
+      removedProducts: []
     };
   },
   methods: {
@@ -19747,6 +19747,7 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios.get("api/products").then(function (res) {
         _this.products = res.data;
+        // Récupération des données de produits supprimés
         _this.getRemovedDatas();
       })["catch"](function (err) {
         return console.log(err);
@@ -19755,31 +19756,30 @@ __webpack_require__.r(__webpack_exports__);
     getRemovedDatas: function getRemovedDatas() {
       var _this2 = this;
       axios.get("api/removed_products").then(function (res) {
-        _this2.removed_products = res.data;
+        _this2.removedProducts = res.data;
+        // Injection des données de produits supprimés
         _this2.injectRemovedDatas();
       })["catch"](function (err) {
         return console.log(err);
       });
     },
     injectRemovedDatas: function injectRemovedDatas() {
+      // Boucle sur tous les produits
       for (var i = 0; i < this.products.length; i++) {
         this.products[i].count_removed = 0;
-        for (var j = 0; j < this.removed_products.length; j++) {
-          if (this.removed_products[j].product_id == this.products[i].id) {
+
+        //Boucle sur les données de produits supprimés 
+        for (var j = 0; j < this.removedProducts.length; j++) {
+          if (this.removedProducts[j].product_id == this.products[i].id) {
+            // Ajout du nombre de fois ou le produit à été supprimé
             this.products[i].count_removed++;
           }
         }
-
-        // let productMatch = this.removed_products.find(removed_product => removed_product.product_id == this.products[i].id);
-        // console.log(productMatch)
-        // if (productMatch) {
-        //     this.products[i].count_removed++; 
-        // }
       }
     }
   },
-
   computed: {
+    // Tri les produits pour que le plus supprimé soit en haut de la liste
     orderedProducts: function orderedProducts() {
       return _.orderBy(this.products, 'count_removed', 'desc');
     }
@@ -19822,22 +19822,32 @@ __webpack_require__.r(__webpack_exports__);
       var _this = this;
       axios.get('/api/products').then(function (response) {
         return _this.products = response.data;
+      })["catch"](function (err) {
+        return console.log(err);
       });
     },
     addToCart: function addToCart($product) {
       var isInCart = false;
+
+      // Vérification de la présence du produit dans le panier
       for (var index = 0; index < this.cart.length; index++) {
         if (this.cart[index].id === $product.id) {
+          //Si il est présent on augment la quantité
           this.cart[index].quantity++;
           isInCart = true;
         }
       }
+
+      // Si il n'y est pas, initialisation de la quantité a 1
       if (!isInCart) {
         $product.quantity = 1;
         this.cart.push($product);
       }
+
+      // Puis enregistremement du panier dans le localStorage
       localStorage.myCart = JSON.stringify(this.cart);
-      this.emitter.emit("number", this.cart.length);
+      // Emission du nombre de produit dans le panier
+      this.emitter.emit("numberProductsInCart", this.cart.length);
       $product.isAddedToCart = true;
     },
     scrollTop: function scrollTop() {
@@ -19848,12 +19858,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   mounted: function mounted() {
+    // Récupération de tous les produits
     this.getProducts();
+
+    // Si il y a un panier enregistré, récupération
     if (localStorage.myCart) {
       this.cart = JSON.parse(localStorage.myCart);
     }
     var slogan = document.getElementById("slogan");
     var vinyle = document.getElementById("vinyle");
+
+    // Permet l'effet d'apparition progressive
     setTimeout(function () {
       slogan.style.opacity = 1;
     }, 1000);
@@ -19893,9 +19908,14 @@ __webpack_require__.r(__webpack_exports__);
   },
   methods: {
     deleteProducts: function deleteProducts($product) {
+      // Suppression du produit dans le tableau
       this.products.splice(this.products.indexOf($product), 1);
+      // Enregistrement du nouveau tableau dans le localStorage
       localStorage.myCart = JSON.stringify(this.products);
-      this.emitter.emit("number", this.products.length);
+      // Emmission du nouveau nombre de produits dans le panier
+      this.emitter.emit("numberProductsInCart", this.products.length);
+
+      // Enregistrement en DB de la suppression
       axios__WEBPACK_IMPORTED_MODULE_0___default().post("/api/removed_products", {
         product_id: $product.id
       }).then(function (res) {
@@ -19906,15 +19926,17 @@ __webpack_require__.r(__webpack_exports__);
     }
   },
   computed: {
+    // Retourne le prix total de tous les produits du panier * quantité
     subtotal: function subtotal() {
       var total = 0;
       for (var index = 0; index < this.products.length; index++) {
-        total += parseFloat(this.products[index].price);
+        total += parseFloat(this.products[index].price * this.products[index].quantity);
       }
       return total;
     }
   },
   mounted: function mounted() {
+    // Récupération du panier dans le localStorage
     if (localStorage.myCart) {
       this.products = JSON.parse(localStorage.myCart);
     }
@@ -19956,16 +19978,19 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
   data: function data() {
     return {
-      number: 0
+      numberProductsInCart: 0
     };
   },
   mounted: function mounted() {
     var _this = this;
+    // Récupération du nombre de produits dans le panier si il y en a
     if (localStorage.myCart) {
-      this.number = JSON.parse(localStorage.myCart).length;
+      this.numberProductsInCart = JSON.parse(localStorage.myCart).length;
     }
-    this.emitter.on("number", function (number) {
-      _this.number = number;
+
+    // Écoute des changements
+    this.emitter.on("numberProductsInCart", function (numberProductsInCart) {
+      _this.numberProductsInCart = numberProductsInCart;
     });
   }
 });
@@ -20248,7 +20273,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     "onUpdate:modelValue": _cache[1] || (_cache[1] = function ($event) {
       return $data.delivery = $event;
     })
-  }, null, 8 /* PROPS */, _hoisted_24), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.delivery]]), _hoisted_25])])]), _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.delivery == 0 ? "Free" : $data.delivery.toFixed(2) + "€"), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(($data.delivery + $options.subtotal).toFixed(2)) + "€", 1 /* TEXT */)])])]), _hoisted_36, _hoisted_37])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_38, _hoisted_40))], 64 /* STABLE_FRAGMENT */);
+  }, null, 8 /* PROPS */, _hoisted_24), [[vue__WEBPACK_IMPORTED_MODULE_0__.vModelRadio, $data.delivery]]), _hoisted_25])])]), _hoisted_26, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_29, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_30, [_hoisted_31, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_32, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.delivery === 0 ? "Free" : $data.delivery.toFixed(2) + "€"), 1 /* TEXT */)]), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_33, [_hoisted_34, (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_35, [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("b", null, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)(($data.delivery + $options.subtotal).toFixed(2)) + "€", 1 /* TEXT */)])])]), _hoisted_36, _hoisted_37])])) : ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("div", _hoisted_38, _hoisted_40))], 64 /* STABLE_FRAGMENT */);
 }
 
 /***/ }),
@@ -20361,7 +20386,7 @@ function render(_ctx, _cache, $props, $setup, $data, $options) {
     to: "/cart"
   }, {
     "default": (0,vue__WEBPACK_IMPORTED_MODULE_0__.withCtx)(function () {
-      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, $data.number ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.number), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
+      return [(0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementVNode)("div", _hoisted_6, [_hoisted_7, $data.numberProductsInCart ? ((0,vue__WEBPACK_IMPORTED_MODULE_0__.openBlock)(), (0,vue__WEBPACK_IMPORTED_MODULE_0__.createElementBlock)("span", _hoisted_8, (0,vue__WEBPACK_IMPORTED_MODULE_0__.toDisplayString)($data.numberProductsInCart), 1 /* TEXT */)) : (0,vue__WEBPACK_IMPORTED_MODULE_0__.createCommentVNode)("v-if", true)])];
     }),
     _: 1 /* STABLE */
   }), _hoisted_9])]);

@@ -35,49 +35,54 @@ export default {
     data() {
         return {
             products : [],
-            removed_products : []
+            removedProducts : []
         }
     },
+    
     methods: {
 		getProducts() {
             axios.get("api/products")
             .then(res => {
                 this.products = res.data;
+                // Récupération des données de produits supprimés
                 this.getRemovedDatas();
             })
             .catch(err => console.log(err));
 		},
+
         getRemovedDatas() {
             axios.get("api/removed_products")
             .then(res => {
-                this.removed_products = res.data;
+                this.removedProducts = res.data;
+                // Injection des données de produits supprimés
                 this.injectRemovedDatas();
             })
             .catch(err => console.log(err));
 		},
+
         injectRemovedDatas() {
+            // Boucle sur tous les produits
             for (let i = 0; i < this.products.length; i++) {
                 this.products[i].count_removed = 0;
 
-                for (let j = 0; j < this.removed_products.length; j++) {
-                    if (this.removed_products[j].product_id == this.products[i].id) {
+                //Boucle sur les données de produits supprimés 
+                for (let j = 0; j < this.removedProducts.length; j++) {
+                    if (this.removedProducts[j].product_id == this.products[i].id) {
+                        // Ajout du nombre de fois ou le produit à été supprimé
                         this.products[i].count_removed++; 
                     }
                 }
-
-                // let productMatch = this.removed_products.find(removed_product => removed_product.product_id == this.products[i].id);
-                // console.log(productMatch)
-                // if (productMatch) {
-                //     this.products[i].count_removed++; 
-                // }
             }
         }
 	},
+
     computed: {
+        // Tri les produits pour que le plus supprimé soit en haut de la liste
         orderedProducts: function () {
             return _.orderBy(this.products, 'count_removed', 'desc')
         }
     },
+
     mounted() {
         this.getProducts();
 	}

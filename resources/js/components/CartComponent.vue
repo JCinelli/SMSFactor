@@ -57,7 +57,7 @@
             <div class="subtotal">
                 <div class="label-price">
                     <div class="subtotal-shipping">Delivery</div>
-                    <div class="subtotal-shipping-price">{{ delivery == 0 ? "Free" : delivery.toFixed(2)+ "€" }}</div>
+                    <div class="subtotal-shipping-price">{{ delivery === 0 ? "Free" : delivery.toFixed(2)+ "€" }}</div>
                 </div>
                 <div class="label-price">
                     <div class="subtotal-total">Subtotal</div>
@@ -80,41 +80,47 @@ export default {
     components:{
         NavComponent
     },
+
     data() {
         return {
             products: [],
             delivery: 0
         }
     },
+
     methods: {
 		deleteProducts($product) {
+            // Suppression du produit dans le tableau
 			this.products.splice(this.products.indexOf($product), 1);
+            // Enregistrement du nouveau tableau dans le localStorage
             localStorage.myCart = JSON.stringify(this.products);
-            this.emitter.emit("number", this.products.length);
+            // Emmission du nouveau nombre de produits dans le panier
+            this.emitter.emit("numberProductsInCart", this.products.length);
 
+            // Enregistrement en DB de la suppression
             axios.post("/api/removed_products", { 
                 product_id : $product.id
             })
-            .then(
-                res => console.log(res)
-            ).catch(
-                err => console.log(err)
-            );
+            .then(res => console.log(res))
+            .catch(err => console.log(err));
 		},
 	},
+
     computed : {
+        // Retourne le prix total de tous les produits du panier * quantité
         subtotal() {
             let total = 0;
 
             for (let index = 0; index < this.products.length; index++) {
-               total += parseFloat(this.products[index].price);                
+               total += parseFloat(this.products[index].price * this.products[index].quantity);                
             }
 
             return total;
         }
     },
-    mounted() {
 
+    mounted() {
+        // Récupération du panier dans le localStorage
         if(localStorage.myCart) {
             this.products = JSON.parse(localStorage.myCart)
         }
