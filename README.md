@@ -62,3 +62,5 @@ Finaly, run :
 ```
 
 to start the application.
+
+After visiting the home page and the shopping cart page, you can access the deletion data recovery page by going to the url "/admin".
